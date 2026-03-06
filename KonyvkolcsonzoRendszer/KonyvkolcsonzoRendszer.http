@@ -1,0 +1,6 @@
+@KonyvkolcsonzoRendszer_HostAddress = http://localhost:5174
+
+GET {{KonyvkolcsonzoRendszer_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

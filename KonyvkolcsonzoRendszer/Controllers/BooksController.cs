@@ -27,12 +27,20 @@ namespace KonyvkolcsonzoRendszer.Controllers
             return StatusCode(201, response);
 
         }
+
         [HttpPut("{id}/borrow")]
         public async Task<ActionResult> BorrowBook(int id)
         {
             var resp = await _book.PutBorrowBook(id);
 
 
+            return Ok(resp);
+        }
+
+        [HttpGet("borrowed")]
+        public async Task<ActionResult> GetBorrowedBooks()
+        {
+            var resp = await _book.GetBorrowedBook();
             return Ok(resp);
         }
     }

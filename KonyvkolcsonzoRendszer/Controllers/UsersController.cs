@@ -20,6 +20,10 @@ namespace KonyvkolcsonzoRendszer.Controllers
         public async Task<ActionResult> Regist(LoginDto loginDto)
         {
             var response = await _user.PostRegist(loginDto);
+            if (response is string)
+            {
+                return BadRequest(response);
+            }
             return Ok(response);
         }
     }

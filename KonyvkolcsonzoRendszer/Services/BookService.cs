@@ -8,6 +8,12 @@ namespace KonyvkolcsonzoRendszer.Services
     public class BookService : IBookService
     {
         private readonly KonyvKolcsonzoContext _context;
+
+        public BookService(KonyvKolcsonzoContext context)
+        {
+            _context = context;
+        }
+
         public async Task<object> GetBorrowedBook()
         {
             var usersBooks = _context.Users.Include(u => u.Books).Select(u => new { u.Username });

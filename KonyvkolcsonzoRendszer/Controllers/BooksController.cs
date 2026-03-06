@@ -33,7 +33,10 @@ namespace KonyvkolcsonzoRendszer.Controllers
         public async Task<ActionResult> BorrowBook(int id, int bookId)
         {
             var resp = await _book.PutBorrowBook(id, bookId);
-
+            if (resp is string)
+            {
+               return NotFound(resp);
+            }
             return Ok(resp);
         }
 

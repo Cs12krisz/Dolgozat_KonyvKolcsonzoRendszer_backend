@@ -16,7 +16,7 @@ namespace KonyvkolcsonzoRendszer.Services
 
         public async Task<object> GetBorrowedBook()
         {
-            var usersBooks = _context.Users.Include(u => u.Books).Select(u => new { u.Username, Books = u.Books.Select(b => new { b.Author, b.Title }) });
+            var usersBooks = _context.Users.Select(u => new { u.Username, Books = u.Books.Select(b => new { b.Author, b.Title }) });
             return new { Value = usersBooks, Message = "Sikeres lekérés" };
         }
 

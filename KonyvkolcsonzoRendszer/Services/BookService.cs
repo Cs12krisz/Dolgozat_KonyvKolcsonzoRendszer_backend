@@ -16,7 +16,7 @@ namespace KonyvkolcsonzoRendszer.Services
 
         public async Task<object> GetBorrowedBook()
         {
-            var usersBooks = _context.Users.Include(u => u.Books).Select(u => new { u.Username });
+            var usersBooks = _context.Users.Include(u => u.Books).Select(u => new { u.Username, Books = u.Books.Select(b => new { b.Author, b.Title }) });
             return new { Value = usersBooks, Message = "Sikeres lekérés" };
         }
 
@@ -27,10 +27,8 @@ namespace KonyvkolcsonzoRendszer.Services
             {
                 Book book = new Book() 
                 { 
-                    Id = newBook.Id,
                     Title = newBook.Title,
                     Author = newBook.Author,
-                    UserId = newBook.UserId,
                 };
                 await _context.AddAsync(book);
                 await _context.SaveChangesAsync();
@@ -39,9 +37,20 @@ namespace KonyvkolcsonzoRendszer.Services
             return "Sikertelen feltöltés";
         }
 
-        public Task<object> PutBorrowBook(int id)
+        public async Task<object> PutBorrowBook(int id, int bookId)
         {
-            throw new NotImplementedException();
+            var foundBook = await _context.Books.FirstOrDefaultAsync(b => b.Id == bookId);
+
+            if (foundBook != null)
+            {
+                foundBook.UserId = id;
+
+                _context.Update(foundBook);
+                await _context.SaveChangesAsync();
+                return new { Value = foundBook, Message = "Sikeres kölcsönzés" };
+            }
+
+            return "Sikertelen kölcsönzés";
         }
     }
 }

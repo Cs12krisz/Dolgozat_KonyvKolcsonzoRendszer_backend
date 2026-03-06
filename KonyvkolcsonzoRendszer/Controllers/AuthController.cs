@@ -37,7 +37,7 @@ namespace KonyvkolcsonzoRendszer.Controllers
                 }
 
             }
-            return BadRequest();
+            return BadRequest("Sikertelen bejelentkezés");
         }
 
     }

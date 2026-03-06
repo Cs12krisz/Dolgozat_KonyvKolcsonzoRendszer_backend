@@ -17,6 +17,7 @@ public partial class User
     public string? Role { get; set; }
 
     public string? Salt { get; set; }
+
     [JsonIgnore]
     public virtual ICollection<Book> Books { get; set; } = new List<Book>();
 }

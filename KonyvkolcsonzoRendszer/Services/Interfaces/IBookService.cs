@@ -7,7 +7,7 @@ namespace KonyvkolcsonzoRendszer.Services.Interfaces
     {
         Task<object> PostNewBook(NewBookDto newBook);
 
-        Task<object> PutBorrowBook(int id);
+        Task<object> PutBorrowBook(int id, int bookId);
         Task<object> GetBorrowedBook();
     }
 }

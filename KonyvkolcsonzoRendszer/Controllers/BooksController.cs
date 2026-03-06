@@ -16,6 +16,7 @@ namespace KonyvkolcsonzoRendszer.Controllers
         {
             _book = book;
         }
+
         [HttpPost]
         public async Task<ActionResult> NewBook(NewBookDto newBook)
         {
@@ -29,10 +30,9 @@ namespace KonyvkolcsonzoRendszer.Controllers
         }
 
         [HttpPut("{id}/borrow")]
-        public async Task<ActionResult> BorrowBook(int id)
+        public async Task<ActionResult> BorrowBook(int id, int bookId)
         {
-            var resp = await _book.PutBorrowBook(id);
-
+            var resp = await _book.PutBorrowBook(id, bookId);
 
             return Ok(resp);
         }

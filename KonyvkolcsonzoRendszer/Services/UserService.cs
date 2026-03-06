@@ -7,13 +7,11 @@ namespace KonyvkolcsonzoRendszer.Services
     public class UserService : IUserService
     {
         private readonly KonyvKolcsonzoContext _context;
-        private readonly GenerateToken generateToken;
         private readonly AuthService authService;
 
-        public UserService(KonyvKolcsonzoContext context, GenerateToken generateToken, AuthService authService)
+        public UserService(KonyvKolcsonzoContext context, AuthService authService)
         {
             _context = context;
-            this.generateToken = generateToken;
             this.authService = authService;
         }
 
